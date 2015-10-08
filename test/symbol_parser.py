@@ -3,10 +3,10 @@ __author__ = 'Owen'
 
 class SymbolParser:
 
-    def hello(self, decomposeString):
-        if len(decomposeString) == 1:
-            print(decomposeString)
+    def hello(self, decompose_string):
+        if len(decompose_string) == 1:
+            print(decompose_string)
             print("Finished recursion")
         else:
-            print(decomposeString[0])
-            self.hello(decomposeString[1:])
+            print(decompose_string[0])
+            self.hello(decompose_string[1:])
