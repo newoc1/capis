@@ -1,17 +1,14 @@
-from test.symbol_parser import SymbolParser
-from test.modus_ponens import ModusPonens
-from test.antecedent import Antecedent
-from test.consequent import Consequent
+from action.action import Action
+from alignment.alignment import Alignment
+from observer.observer import Observer
+from subject.subject import Subject
 
-something = SymbolParser()
-something.hello('bat')
-something.hello('from fedora!')
+alignment = Alignment(100, 100, 0, 0)
+action = Action('destroy', alignment)
 
-it_is_raining = Antecedent("It\'s raining")
-bad_antecedent = Antecedent("Bad anted")
-it_is_pouring = Consequent("It is pouring")
-modus_ponens_A = ModusPonens(it_is_raining,it_is_pouring)
+observer = Observer('observer', alignment, [action])
+subject = Subject('subject', 'subject description')
 
-consequent = modus_ponens_A.infer_result(bad_antecedent)
-if consequent:
-    consequent.describe()
+subject.register_observer(observer)
+subject.unregister_observer(observer)
+subject.notify_observers()
