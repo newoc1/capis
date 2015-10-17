@@ -1,23 +1,22 @@
-__author__ = 'melop'
 
 
 class Subject:
-    def __init__(self, name, description):
-        self.name = name
-        self.description = description
+    def __init__(self, environment_item):
+        self.environment_item = environment_item
         self.observers = []
 
     def register_observer(self, observer):
         self.observers.append(observer)
-        observer.set_subject(self)
+        observer.subject = self
 
-    def unregister_observer(self, observer):
+    def remove_observer(self, observer):
         if observer in self.observers:
             self.observers.remove(observer)
-            observer.set_subject(None)
+            observer.subject = None
+            observer.subject_handler = None
 
-    def notify_observers(self):
+    def notify_observers(self, action):
         if len(self.observers) == 0:
             print('no observers')
         for observer in self.observers:
-            observer.receive_update(self)
+            observer.receive_update(action)
