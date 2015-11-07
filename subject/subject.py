@@ -1,9 +1,9 @@
-
-
 class Subject:
-    def __init__(self, environment_item):
+    def __init__(self, name, environment_item):
+        self.name = name
         self.environment_item = environment_item
         self.observers = []
+        self.owner = None
 
     def register_observer(self, observer):
         self.observers.append(observer)
@@ -13,7 +13,6 @@ class Subject:
         if observer in self.observers:
             self.observers.remove(observer)
             observer.subject = None
-            observer.subject_handler = None
 
     def notify_observers(self, action):
         if len(self.observers) == 0:

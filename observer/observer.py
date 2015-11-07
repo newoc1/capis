@@ -1,12 +1,10 @@
 class Observer:
-    def __init__(self, name, alignment, subject_handler=None):
-        self.name = name
-        self.alignment = alignment
+    def __init__(self):
         self.subject = None
-        self.subject_handler = subject_handler
+        self.owner = None
 
-    def update_subject(self, subject_update_command):
-        subject_update_command.update(self.subject)
-
+    # Does not produce a reaction if the invoker of the
+    # action was the Persona that owns it
     def receive_update(self, action):
-        self.subject_handler(self, action)
+        if not action.invoker == self.owner:
+            self.owner.react(action)
